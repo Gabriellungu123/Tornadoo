@@ -1,14 +1,18 @@
 import asyncio
 import tornado
 
-class MainHandler(tornado.web.RequestHandler):
+class FormHandler(tornado.web.RequestHandler):
     def get(self):
-        self.write("Hello, world")
+        self.render("formulario.html")  # busca en /templates
 
 def make_app():
     return tornado.web.Application([
-        (r"/", MainHandler),
-    ])
+        (r"/", FormHandler),
+    ],
+    template_path="templates",  # carpeta donde está el HTML
+    static_path="static")       # carpeta donde está el CSS
+
+
 
 async def main():
     app = make_app()
