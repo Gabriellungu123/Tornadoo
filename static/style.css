@@ -1,49 +1,73 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #0d7eda;
+    font-family: 'Inter', Arial, sans-serif;
+    background: linear-gradient(to right, #0d7eda, #0b6bb5);
     margin: 0;
     padding: 0;
+    color: #333;
 }
 
 .container {
     max-width: 600px;
     margin: 50px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background: #fff;
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
     text-align: center;
-    color: #333;
+    color: #0d7eda;
+    margin-bottom: 30px;
 }
 
 form label {
     display: block;
-    margin-top: 15px;
-    font-weight: bold;
+    margin-top: 20px;
+    font-weight: 600;
+    color: #444;
 }
 
 form input,
 form textarea {
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
+    padding: 12px;
+    margin-top: 8px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
 }
 
-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #0077cc;
+form input:focus,
+form textarea:focus {
+    border-color: #0d7eda;
+    outline: none;
+}
+
+.btn-enviar {
+    margin-top: 30px;
+    padding: 12px 25px;
+    background-color: #0d7eda;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
+    font-size: 16px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #005fa3;
+.btn-enviar:hover {
+    background-color: #0b6bb5;
+}
+
+@media (max-width: 600px) {
+    .container {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
 }
