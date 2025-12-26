@@ -3,20 +3,20 @@ import tornado.web
 
 
 # ============================
-#   CONTROLADORES (Handlers)
+#   HANDLERS (Controladores)
 # ============================
 
 class ControladorFormulario(tornado.web.RequestHandler):
     def get(self):
         # Se ejecuta cuando el usuario entra a "/" con método GET
-        self.render("formulario.html")  # Busca en la carpeta /templates
+        self.render("formulario.html")  # Busca en /templates
 
 
-class ControladorEnvio(tornado.web.RequestHandler):
+class SubmitHandler(tornado.web.RequestHandler):
     def post(self):
         # Recoge los datos enviados desde el formulario
-        nombre_usuario = self.get_argument("nombre")
-        correo_usuario = self.get_argument("email")
+        usuario = self.get_argument("nombre")
+        email = self.get_argument("email")
 
         # Aquí podrías validar login, guardar datos en BD, etc.
 
@@ -24,7 +24,7 @@ class ControladorEnvio(tornado.web.RequestHandler):
         self.redirect("/pagina")
 
 
-class ControladorPagina(tornado.web.RequestHandler):
+class PaginaHandler(tornado.web.RequestHandler):
     def get(self):
         # Renderiza la página final
         self.render("pagina.html")
@@ -34,23 +34,23 @@ class ControladorPagina(tornado.web.RequestHandler):
 #   APLICACIÓN TORNADO
 # ============================
 
-def crear_aplicacion():
+def make_app():
     return tornado.web.Application([
-        (r"/", ControladorFormulario),      # Página principal
-        (r"/enviar", ControladorEnvio),     # Procesa formulario
-        (r"/pagina", ControladorPagina),    # Página final
+        (r"/", ControladorFormulario),   # Página principal
+        (r"/submit", SubmitHandler),     # Procesa formulario
+        (r"/pagina", PaginaHandler),     # Página final
     ],
-    template_path="templates",  # Carpeta donde están los HTML
-    static_path="static")       # Carpeta donde están CSS/JS/imagenes
+    template_path="templates",  # Carpeta de HTML
+    static_path="static")       # Carpeta de CSS/JS/imagenes
 
 
 # ============================
 #   FUNCIÓN PRINCIPAL
 # ============================
 
-async def principal():
-    aplicacion = crear_aplicacion()
-    aplicacion.listen(8888)  # Servidor en puerto 8888
+async def main():
+    app = make_app()
+    app.listen(8888)  # Servidor en puerto 8888
     await asyncio.Event().wait()  # Mantiene el servidor activo
 
 
@@ -59,4 +59,4 @@ async def principal():
 # ============================
 
 if __name__ == "__main__":
-    asyncio.run(principal())
+    asyncio.run(main())
